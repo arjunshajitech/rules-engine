@@ -1,0 +1,51 @@
+package com.example.rules.engine;
+
+global com.example.rules.engine.Fare rideFare;
+dialect "mvel"
+
+// Rule for distance < 10 miles without night surcharge
+rule "Calculate Taxi Fare - Scenario 1"
+    when
+        taxiRideInstance: TaxiRide(isNightSurcharge == false && distanceInMile < 10)
+    then
+        rideFare.setNightSurcharge(0L);
+        rideFare.setRideFare(70L);
+end
+
+// Rule for distance between 10 and 20 miles without night surcharge
+rule "Calculate Taxi Fare - Scenario 2"
+    when
+        taxiRideInstance: TaxiRide(isNightSurcharge == false && distanceInMile >= 10 && distanceInMile < 20)
+    then
+        rideFare.setNightSurcharge(0L);
+        rideFare.setRideFare(100L);
+end
+
+// Rule for distance between 20 and 50 miles without night surcharge
+rule "Calculate Taxi Fare - Scenario 3"
+    when
+        taxiRideInstance: TaxiRide(isNightSurcharge == false && distanceInMile >= 20 && distanceInMile < 50)
+    then
+        rideFare.setNightSurcharge(0L);
+        rideFare.setRideFare(150L);
+end
+
+// Rule for distance between 50 and 100 miles without night surcharge
+rule "Calculate Taxi Fare - Scenario 4"
+    when
+        taxiRideInstance: TaxiRide(isNightSurcharge == false && distanceInMile >= 50 && distanceInMile <= 100)
+    then
+        rideFare.setNightSurcharge(0L);
+        rideFare.setRideFare(250L);
+end
+
+// Rule for distance < 10 miles with night surcharge
+rule "Calculate Taxi Fare - Night - Scenario 1"
+    when
+        taxiRideInstance: TaxiRide(isNightSurcharge == true && distanceInMile < 10)
+    then
+        rideFare.setNightSurcharge(20L);
+        rideFare.setRideFare(90L);
+end
+
+// You can continue in a similar way for other ranges...
