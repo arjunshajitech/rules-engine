@@ -8,7 +8,7 @@ resources/com.example.rules.engine``
 ### Clone and Run 🚀
 
 ```bash
-git clone https://github.com/your-username/taxi-fare-rule-engine.git
+git https://github.com/arjunshajitech/rules-engine.git
 cd taxi-fare-rule-engine
 ````
 
